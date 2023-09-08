@@ -31,6 +31,7 @@ with open("exp-def.sh", "w") as f:
             f.write(gen_cmd + '\n')
         f.write('kill $app_pid\n')
         f.write('mv consumption.csv "$results"/consumption-' + str(stress_level) + '%\n')
+         f.write('sleep ' + str(delay) + '\n')
 
 tasksets = [x.get_cpu_id() for x in allocated_cpu]
 duration = 0
@@ -49,6 +50,7 @@ with open("exp-smt.sh", "w") as f:
             subset = ''.join(str(core) + ',' for core in tasksets[:load_level])[:-1]
             gen_cmd = cmd_tsk.replace('{subset}', subset) + ' ' + cmd_load.replace('{core}', str(req_core)).replace('{len}', str(stress_level))
             f.write(gen_cmd + '\n')
+        f.write('sleep ' + str(delay) + '\n')
         f.write('kill $app_pid\n')
         f.write('mv consumption.csv "$results"/consumption-' + str(stress_level) + '%\n')
 
