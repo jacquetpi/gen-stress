@@ -1,7 +1,7 @@
 from utils.cpuexplorer import CpuExplorer
 
 # Parameters
-delay = 15
+delay = 30
 
 cmd_tsk = 'taskset -c {subset}'
 cmd_load = 'stress-ng --cpu {core} -l {len} --timeout ' + str(delay)
@@ -31,7 +31,7 @@ with open("exp-def.sh", "w") as f:
             f.write(gen_cmd + '\n')
         f.write('kill $app_pid\n')
         f.write('mv consumption.csv "$results"/consumption-' + str(stress_level) + '%\n')
-         f.write('sleep ' + str(delay) + '\n')
+        f.write('sleep ' + str(delay) + '\n')
 
 tasksets = [x.get_cpu_id() for x in allocated_cpu]
 duration = 0
